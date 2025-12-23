@@ -18,7 +18,7 @@
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="SkiaSharp" Version="2.88.6" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.5" />
-    <PackageReference Include="AwesomeIO" Version="1.0.2" />
+    <PackageReference Include="AwesomeO" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>
