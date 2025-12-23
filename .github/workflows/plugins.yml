@@ -1,4 +1,4 @@
-name: Build Plugins
+name: Build plugins (changed only)
 
 on:
   push:
@@ -10,8 +10,69 @@ on:
   workflow_dispatch:
 
 jobs:
+  changes:
+    runs-on: windows-latest
+    outputs:
+      displaysettings: ${{ steps.filter.outputs.displaysettings }}
+      ytmdesktop:     ${{ steps.filter.outputs.ytmdesktop }}
+      openweather:    ${{ steps.filter.outputs.openweather }}
+      profiles:       ${{ steps.filter.outputs.profiles }}
+      powerplan:      ${{ steps.filter.outputs.powerplan }}
+      teams:          ${{ steps.filter.outputs.teams }}
+      solidpercentage:${{ steps.filter.outputs.solidpercentage }}
+      connectingdots: ${{ steps.filter.outputs.connectingdots }}
+      ripples:        ${{ steps.filter.outputs.ripples }}
+      shuffle:        ${{ steps.filter.outputs.shuffle }}
+      nexus:          ${{ steps.filter.outputs.nexus }}
+      drippingpaint:  ${{ steps.filter.outputs.drippingpaint }}
+      json:           ${{ steps.filter.outputs.json }}
+      flickeringlights:${{ steps.filter.outputs.flickeringlights }}
+      extendedwebapi: ${{ steps.filter.outputs.extendedwebapi }}
+      extranodes:     ${{ steps.filter.outputs.extranodes }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Detect changed plugin folders
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            displaysettings:
+              - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.DisplaySettings/**'
+            ytmdesktop:
+              - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.YTMdesktop/**'
+            openweather:
+              - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.OpenWeather/**'
+            profiles:
+              - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/**'
+            powerplan:
+              - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.PowerPlan/**'
+            teams:
+              - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Teams/**'
+            solidpercentage:
+              - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.SolidPercentage/**'
+            connectingdots:
+              - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.ConnectingDots/**'
+            ripples:
+              - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.Ripples/**'
+            shuffle:
+              - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.Shuffle/**'
+            nexus:
+              - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.Nexus/**'
+            drippingpaint:
+              - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.DrippingPaint/**'
+            json:
+              - 'src/Modules/Artemis.Plugins.Modules.Json/**'
+            flickeringlights:
+              - 'src/LayerEffects/Artemis.Plugins.LayerEffect.FlickeringLights/**'
+            extendedwebapi:
+              - 'src/Collections/Artemis.Plugins.ExtendedWebAPI/**'
+            extranodes:
+              - 'src/Nodes/Artemis.Plugins.Nodes.Extra/**'
+
   build-displaysettings:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.displaysettings == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.DisplaySettings/Artemis.Plugins.DataModelExpansions.DisplaySettings.csproj
@@ -19,11 +80,11 @@ jobs:
         with:
           name: DisplaySettings
           path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.DisplaySettings/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.DisplaySettings/**'
 
   build-ytmdesktop:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.ytmdesktop == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.YTMdesktop/Artemis.Plugins.DataModelExpansions.YTMdesktop.csproj
@@ -31,11 +92,11 @@ jobs:
         with:
           name: YTMdesktop
           path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.YTMdesktop/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.YTMdesktop/**'
 
   build-openweather:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.openweather == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.OpenWeather/Artemis.Plugins.DataModelExpansions.OpenWeather.csproj
@@ -43,11 +104,11 @@ jobs:
         with:
           name: OpenWeather
           path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.OpenWeather/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.OpenWeather/**'
 
   build-profiles:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.profiles == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/Artemis.Plugins.DataModelExpansions.Profiles.csproj
@@ -55,11 +116,11 @@ jobs:
         with:
           name: Profiles
           path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/**'
 
   build-powerplan:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.powerplan == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.PowerPlan/Artemis.Plugins.DataModelExpansions.PowerPlan.csproj
@@ -67,11 +128,11 @@ jobs:
         with:
           name: PowerPlan
           path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.PowerPlan/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.PowerPlan/**'
 
   build-teams:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.teams == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Teams/Artemis.Plugins.DataModelExpansions.Teams.csproj
@@ -79,11 +140,11 @@ jobs:
         with:
           name: Teams
           path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Teams/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Teams/**'
 
   build-solidpercentage:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.solidpercentage == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.SolidPercentage/Artemis.Plugins.LayerBrushes.SolidPercentage.csproj
@@ -91,11 +152,11 @@ jobs:
         with:
           name: SolidPercentage
           path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.SolidPercentage/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.SolidPercentage/**'
 
   build-connectingdots:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.connectingdots == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.ConnectingDots/Artemis.Plugins.LayerBrushes.ConnectingDots.csproj
@@ -103,11 +164,11 @@ jobs:
         with:
           name: ConnectingDots
           path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.ConnectingDots/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.ConnectingDots/**'
 
   build-ripples:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.ripples == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.Ripples/Artemis.Plugins.LayerBrushes.Ripples.csproj
@@ -115,11 +176,11 @@ jobs:
         with:
           name: Ripples
           path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.Ripples/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.Ripples/**'
 
   build-shuffle:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.shuffle == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.Shuffle/Artemis.Plugins.LayerBrushes.Shuffle.csproj
@@ -127,11 +188,11 @@ jobs:
         with:
           name: Shuffle
           path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.Shuffle/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.Shuffle/**'
 
   build-nexus:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.nexus == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.Nexus/Artemis.Plugins.LayerBrushes.Nexus.csproj
@@ -139,11 +200,11 @@ jobs:
         with:
           name: Nexus
           path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.Nexus/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.Nexus/**'
 
   build-drippingpaint:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.drippingpaint == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.DrippingPaint/Artemis.Plugins.LayerBrushes.DrippingPaint.csproj
@@ -151,11 +212,11 @@ jobs:
         with:
           name: DrippingPaint
           path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.DrippingPaint/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/LayerBrushes/Artemis.Plugins.LayerBrushes.DrippingPaint/**'
 
   build-json:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.json == 'true' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v3
       - run: dotnet publish -c Release src/Modules/Artemis.Plugins.Modules.Json/Artemis.Plugins.Modules.Json.csproj
@@ -163,10 +224,39 @@ jobs:
         with:
           name: Json
           path: src/Modules/Artemis.Plugins.Modules.Json/bin/x64/Release/net10.0/publish/
-    paths:
-      - 'src/Modules/Artemis.Plugins.Modules.Json/**'
 
   build-flickeringlights:
     runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.flickeringlights == 'true' || github.event_name == 'workflow_dispatch'
     steps:
-      -
+      - uses: actions/checkout@v3
+      - run: dotnet publish -c Release src/LayerEffects/Artemis.Plugins.LayerEffect.FlickeringLights/Artemis.Plugins.LayerEffect.FlickeringLights.csproj
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FlickeringLights
+          path: src/LayerEffects/Artemis.Plugins.LayerEffect.FlickeringLights/bin/x64/Release/net10.0/publish/
+
+  build-extendedwebapi:
+    runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.extendedwebapi == 'true' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v3
+      - run: dotnet publish -c Release src/Collections/Artemis.Plugins.ExtendedWebAPI/Artemis.Plugins.ExtendedWebAPI.csproj
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ExtendedWebAPI
+          path: src/Collections/Artemis.Plugins.ExtendedWebAPI/bin/x64/Release/net10.0/publish/
+
+  build-extranodes:
+    runs-on: windows-latest
+    needs: changes
+    if: needs.changes.outputs.extranodes == 'true' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v3
+      - run: dotnet publish -c Release src/Nodes/Artemis.Plugins.Nodes.Extra/Artemis.Plugins.Nodes.Extra.csproj
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ExtraNodes
+          path: src/Nodes/Artemis.Plugins.Nodes.Extra/bin/x64/Release/net10.0/publish/
