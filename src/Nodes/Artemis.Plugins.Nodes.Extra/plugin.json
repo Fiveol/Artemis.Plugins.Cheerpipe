@@ -1,6 +1,6 @@
 ﻿{
   "Guid": "560bb40a-7800-4aef-9945-d566134068f0",
-  "Api": "1.0",
+  "MinimumVersion": "1.2025.1222.3",
   "Name": "Extra nodes",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
