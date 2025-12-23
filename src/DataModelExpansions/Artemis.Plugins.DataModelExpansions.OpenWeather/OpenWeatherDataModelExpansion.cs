@@ -4,8 +4,7 @@ using System.Linq;
 using Artemis.Core;
 using Artemis.Core.Modules;
 using Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels;
-using Awesomio.Weather.CurrentWeather;   // corrected namespace
-using Awesomio.Weather;                         // corrected namespace
+using Awesomio.Weather;   // WeatherClient and CurrentWeatherModel are here
 using Serilog;
 
 namespace Artemis.Plugins.DataModelExpansions.OpenWeather
@@ -39,7 +38,7 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
         public override void Enable()
         {
             // TODO: Make frequency configurable 
-            AddTimedUpdate(TimeSpan.FromSeconds(10), _ => UpdateWeatherData());
+            AddTimedUpdate(TimeSpan.FromMinutes(10), _ => UpdateWeatherData());
             UpdateWeatherData();
         }
 
@@ -57,7 +56,7 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
                 string accessKey = _apiKeySetting.Value;
                 var client = new WeatherClient(accessKey);
 
-                // corrected type name
+                // Correct type name, no extra namespace
                 CurrentWeatherModel data = client
                     .GetCurrentWeatherAsync<CurrentWeatherModel>(_citySetting.Value, "en", _unitOfMeasurementSetting.Value)
                     .Result;
