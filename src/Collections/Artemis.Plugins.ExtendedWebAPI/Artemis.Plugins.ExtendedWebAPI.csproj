@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2025.1222.4" />
+        <PackageReference Include="EmbedIO" Version="3.4.3" />
     </ItemGroup>
 
     <ItemGroup>
