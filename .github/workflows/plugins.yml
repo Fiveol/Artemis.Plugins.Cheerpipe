@@ -7,158 +7,158 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release DataModelExpansions/Artemis.Plugins.DataModelExpansions.DisplaySettings/Artemis.Plugins.DataModelExpansions.DisplaySettings.csproj
+      - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.DisplaySettings/Artemis.Plugins.DataModelExpansions.DisplaySettings.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: DisplaySettings
-          path: DataModelExpansions/Artemis.Plugins.DataModelExpansions.DisplaySettings/bin/x64/Release/net10.0/publish/
+          path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.DisplaySettings/bin/x64/Release/net10.0/publish/
 
   build-ytmdesktop:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release DataModelExpansions/Artemis.Plugins.DataModelExpansions.YTMdesktop/Artemis.Plugins.DataModelExpansions.YTMdesktop.csproj
+      - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.YTMdesktop/Artemis.Plugins.DataModelExpansions.YTMdesktop.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: YTMdesktop
-          path: DataModelExpansions/Artemis.Plugins.DataModelExpansions.YTMdesktop/bin/x64/Release/net10.0/publish/
+          path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.YTMdesktop/bin/x64/Release/net10.0/publish/
 
   build-openweather:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release DataModelExpansions/Artemis.Plugins.DataModelExpansions.OpenWeather/Artemis.Plugins.DataModelExpansions.OpenWeather.csproj
+      - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.OpenWeather/Artemis.Plugins.DataModelExpansions.OpenWeather.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: OpenWeather
-          path: DataModelExpansions/Artemis.Plugins.DataModelExpansions.OpenWeather/bin/x64/Release/net10.0/publish/
+          path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.OpenWeather/bin/x64/Release/net10.0/publish/
 
   build-profiles:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/Artemis.Plugins.DataModelExpansions.Profiles.csproj
+      - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/Artemis.Plugins.DataModelExpansions.Profiles.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: Profiles
-          path: DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/bin/x64/Release/net10.0/publish/
+          path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/bin/x64/Release/net10.0/publish/
 
   build-powerplan:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release DataModelExpansions/Artemis.Plugins.DataModelExpansions.PowerPlan/Artemis.Plugins.DataModelExpansions.PowerPlan.csproj
+      - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.PowerPlan/Artemis.Plugins.DataModelExpansions.PowerPlan.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: PowerPlan
-          path: DataModelExpansions/Artemis.Plugins.DataModelExpansions.PowerPlan/bin/x64/Release/net10.0/publish/
+          path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.PowerPlan/bin/x64/Release/net10.0/publish/
 
   build-teams:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release DataModelExpansions/Artemis.Plugins.DataModelExpansions.Teams/Artemis.Plugins.DataModelExpansions.Teams.csproj
+      - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Teams/Artemis.Plugins.DataModelExpansions.Teams.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: Teams
-          path: DataModelExpansions/Artemis.Plugins.DataModelExpansions.Teams/bin/x64/Release/net10.0/publish/
+          path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Teams/bin/x64/Release/net10.0/publish/
 
   build-solidpercentage:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release LayerBrushes/Artemis.Plugins.LayerBrushes.SolidPercentage/Artemis.Plugins.LayerBrushes.SolidPercentage.csproj
+      - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.SolidPercentage/Artemis.Plugins.LayerBrushes.SolidPercentage.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: SolidPercentage
-          path: LayerBrushes/Artemis.Plugins.LayerBrushes.SolidPercentage/bin/x64/Release/net10.0/publish/
+          path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.SolidPercentage/bin/x64/Release/net10.0/publish/
 
   build-connectingdots:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release LayerBrushes/Artemis.Plugins.LayerBrushes.ConnectingDots/Artemis.Plugins.LayerBrushes.ConnectingDots.csproj
+      - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.ConnectingDots/Artemis.Plugins.LayerBrushes.ConnectingDots.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: ConnectingDots
-          path: LayerBrushes/Artemis.Plugins.LayerBrushes.ConnectingDots/bin/x64/Release/net10.0/publish/
+          path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.ConnectingDots/bin/x64/Release/net10.0/publish/
 
   build-ripples:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release LayerBrushes/Artemis.Plugins.LayerBrushes.Ripples/Artemis.Plugins.LayerBrushes.Ripples.csproj
+      - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.Ripples/Artemis.Plugins.LayerBrushes.Ripples.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: Ripples
-          path: LayerBrushes/Artemis.Plugins.LayerBrushes.Ripples/bin/x64/Release/net10.0/publish/
+          path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.Ripples/bin/x64/Release/net10.0/publish/
 
   build-shuffle:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release LayerBrushes/Artemis.Plugins.LayerBrushes.Shuffle/Artemis.Plugins.LayerBrushes.Shuffle.csproj
+      - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.Shuffle/Artemis.Plugins.LayerBrushes.Shuffle.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: Shuffle
-          path: LayerBrushes/Artemis.Plugins.LayerBrushes.Shuffle/bin/x64/Release/net10.0/publish/
+          path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.Shuffle/bin/x64/Release/net10.0/publish/
 
   build-nexus:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release LayerBrushes/Artemis.Plugins.LayerBrushes.Nexus/Artemis.Plugins.LayerBrushes.Nexus.csproj
+      - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.Nexus/Artemis.Plugins.LayerBrushes.Nexus.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: Nexus
-          path: LayerBrushes/Artemis.Plugins.LayerBrushes.Nexus/bin/x64/Release/net10.0/publish/
+          path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.Nexus/bin/x64/Release/net10.0/publish/
 
   build-drippingpaint:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release LayerBrushes/Artemis.Plugins.LayerBrushes.DrippingPaint/Artemis.Plugins.LayerBrushes.DrippingPaint.csproj
+      - run: dotnet publish -c Release src/LayerBrushes/Artemis.Plugins.LayerBrushes.DrippingPaint/Artemis.Plugins.LayerBrushes.DrippingPaint.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: DrippingPaint
-          path: LayerBrushes/Artemis.Plugins.LayerBrushes.DrippingPaint/bin/x64/Release/net10.0/publish/
+          path: src/LayerBrushes/Artemis.Plugins.LayerBrushes.DrippingPaint/bin/x64/Release/net10.0/publish/
 
   build-json:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release Modules/Artemis.Plugins.Modules.Json/Artemis.Plugins.Modules.Json.csproj
+      - run: dotnet publish -c Release src/Modules/Artemis.Plugins.Modules.Json/Artemis.Plugins.Modules.Json.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: Json
-          path: Modules/Artemis.Plugins.Modules.Json/bin/x64/Release/net10.0/publish/
+          path: src/Modules/Artemis.Plugins.Modules.Json/bin/x64/Release/net10.0/publish/
 
   build-flickeringlights:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release LayerEffects/Artemis.Plugins.LayerEffect.FlickeringLights/Artemis.Plugins.LayerEffect.FlickeringLights.csproj
+      - run: dotnet publish -c Release src/LayerEffects/Artemis.Plugins.LayerEffect.FlickeringLights/Artemis.Plugins.LayerEffect.FlickeringLights.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: FlickeringLights
-          path: LayerEffects/Artemis.Plugins.LayerEffect.FlickeringLights/bin/x64/Release/net10.0/publish/
+          path: src/LayerEffects/Artemis.Plugins.LayerEffect.FlickeringLights/bin/x64/Release/net10.0/publish/
 
   build-extendedwebapi:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release Collections/Artemis.Plugins.ExtendedWebAPI/Artemis.Plugins.ExtendedWebAPI.csproj
+      - run: dotnet publish -c Release src/Collections/Artemis.Plugins.ExtendedWebAPI/Artemis.Plugins.ExtendedWebAPI.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: ExtendedWebAPI
-          path: Collections/Artemis.Plugins.ExtendedWebAPI/bin/x64/Release/net10.0/publish/
+          path: src/Collections/Artemis.Plugins.ExtendedWebAPI/bin/x64/Release/net10.0/publish/
 
   build-extra-nodes:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: dotnet publish -c Release Nodes/Artemis.Plugins.Nodes.Extra/Artemis.Plugins.Nodes.Extra.csproj
+      - run: dotnet publish -c Release src/Nodes/Artemis.Plugins.Nodes.Extra/Artemis.Plugins.Nodes.Extra.csproj
       - uses: actions/upload-artifact@v4
         with:
           name: ExtraNodes
-          path: Nodes/Artemis.Plugins.Nodes.Extra/bin/x64/Release/net10.0/publish/
+          path: src/Nodes/Artemis.Plugins.Nodes.Extra/bin/x64/Release/net10.0/publish/
