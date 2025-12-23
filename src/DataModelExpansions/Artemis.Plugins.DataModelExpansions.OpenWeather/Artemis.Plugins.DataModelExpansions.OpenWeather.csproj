@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <!-- Target Windows explicitly so Windows‑only APIs are available -->
     <TargetFramework>net10.0-windows</TargetFramework>
     <Platforms>x64</Platforms>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -9,10 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Core Artemis shared package -->
     <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2025.1222.4" />
-
-    <!-- Common dependencies used across plugins -->
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RestSharp" Version="111.3.0" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.5" />
@@ -21,9 +17,6 @@
 
   <ItemGroup>
     <Content Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
-    <!-- Only include profile.zip if it actually exists -->
-    <Content Include="profile.zip" CopyToOutputDirectory="PreserveNewest" Condition="Exists('profile.zip')" />
-
     <PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="2.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
