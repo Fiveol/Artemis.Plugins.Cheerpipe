@@ -4,7 +4,7 @@ using System.Linq;
 using Artemis.Core;
 using Artemis.Core.Modules;
 using Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels;
-using Awesomio.Weather.Models.CurrentWeather;   // corrected namespace
+using Awesomio.Weather.CurrentWeather;   // corrected namespace
 using Awesomio.Weather;                         // corrected namespace
 using Serilog;
 
