@@ -1,5 +1,2 @@
-Public and general use Artemis (https://github.com/Artemis-RGB/Artemis) Plugins.
-
-Download latest plugin binaries from here: https://nightly.link/Cheerpipe/Artemis.Plugins.Public/workflows/plugins/master 
-
-(Only for WPF Frontend)
+Fixing Cheerpipe's Artemis plugins to build properly against latest Artemis
+1/16 done
