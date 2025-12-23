@@ -9,10 +9,11 @@
 
   <ItemGroup>
     <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2025.1222.4" />
-    <!-- Add missing dependencies -->
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
+    <PackageReference Include="ArtemisRGB.SDK" Version="1.2025.1222.4" />
   </ItemGroup>
+
 
   <ItemGroup>
     <Content Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
