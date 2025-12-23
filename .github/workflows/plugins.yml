@@ -14,21 +14,21 @@ jobs:
     runs-on: windows-latest
     outputs:
       displaysettings: ${{ steps.filter.outputs.displaysettings }}
-      ytmdesktop:     ${{ steps.filter.outputs.ytmdesktop }}
-      openweather:    ${{ steps.filter.outputs.openweather }}
-      profiles:       ${{ steps.filter.outputs.profiles }}
-      powerplan:      ${{ steps.filter.outputs.powerplan }}
-      teams:          ${{ steps.filter.outputs.teams }}
-      solidpercentage:${{ steps.filter.outputs.solidpercentage }}
+      ytmdesktop: ${{ steps.filter.outputs.ytmdesktop }}
+      openweather: ${{ steps.filter.outputs.openweather }}
+      profiles: ${{ steps.filter.outputs.profiles }}
+      powerplan: ${{ steps.filter.outputs.powerplan }}
+      teams: ${{ steps.filter.outputs.teams }}
+      solidpercentage: ${{ steps.filter.outputs.solidpercentage }}
       connectingdots: ${{ steps.filter.outputs.connectingdots }}
-      ripples:        ${{ steps.filter.outputs.ripples }}
-      shuffle:        ${{ steps.filter.outputs.shuffle }}
-      nexus:          ${{ steps.filter.outputs.nexus }}
-      drippingpaint:  ${{ steps.filter.outputs.drippingpaint }}
-      json:           ${{ steps.filter.outputs.json }}
-      flickeringlights:${{ steps.filter.outputs.flickeringlights }}
+      ripples: ${{ steps.filter.outputs.ripples }}
+      shuffle: ${{ steps.filter.outputs.shuffle }}
+      nexus: ${{ steps.filter.outputs.nexus }}
+      drippingpaint: ${{ steps.filter.outputs.drippingpaint }}
+      json: ${{ steps.filter.outputs.json }}
+      flickeringlights: ${{ steps.filter.outputs.flickeringlights }}
       extendedwebapi: ${{ steps.filter.outputs.extendedwebapi }}
-      extranodes:     ${{ steps.filter.outputs.extranodes }}
+      extranodes: ${{ steps.filter.outputs.extranodes }}
     steps:
       - uses: actions/checkout@v3
       - name: Detect changed plugin folders
