@@ -1,6 +1,6 @@
 {
   "Guid": "d2c82843-f906-4204-8708-9c9e7a37afaa",
-  "Api": "1.0",
+  "MinimumVersion": "1.2025.1222.3",
   "Name": "DrippingPaint",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
