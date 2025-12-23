@@ -1,6 +1,6 @@
 {
   "Guid": "3ca79ef0-fd40-4090-b12e-8167d9438795",
-  "Api": "1.0",
+  "MinimumVersion": "1.2025.1222.3",
   "Name": "Flickering Lights",
   "Icon": "LightbulbGroup",
   "Description": "Provides a game Doom/Half life like light flickering based on common lighting patterns",
