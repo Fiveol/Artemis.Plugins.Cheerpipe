@@ -1,22 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
-        <Platforms>x64</Platforms>
-        <EnableDynamicLoading>true</EnableDynamicLoading>
-        <Nullable>enable</Nullable>
-        <NoWarn>CA1416</NoWarn>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Platforms>x64</Platforms>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <Nullable>enable</Nullable>
+    <NoWarn>CA1416</NoWarn>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2025.1222.4" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2025.1222.4" />
+    <!-- Add missing dependencies -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <Content Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
-        <Content Include="profile.zip" CopyToOutputDirectory="PreserveNewest" />
-        <PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="2.0.0">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+  <ItemGroup>
+    <Content Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Remove or conditionally include profile.zip if not present -->
+    <!-- <Content Include="profile.zip" CopyToOutputDirectory="PreserveNewest" Condition="Exists('profile.zip')" /> -->
+    <PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="2.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>
