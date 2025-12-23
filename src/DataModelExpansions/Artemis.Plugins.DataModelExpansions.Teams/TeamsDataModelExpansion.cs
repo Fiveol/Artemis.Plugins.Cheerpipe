@@ -3,8 +3,8 @@ using Artemis.Core;
 using System.Collections.Generic;
 using Artemis.Plugins.DataModelExpansions.Teams.DataModels;
 using Artemis.Plugins.DataModelExpansions.Teams.TeamsPresence;
-using Artemis.Core.Services;
 using System.Linq;
+using System.Diagnostics;   // <-- needed for Process.GetProcessesByName
 
 namespace Artemis.Plugins.DataModelExpansions.Teams
 {
@@ -13,7 +13,6 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
     {
         #region Variables declarations
 
-        private readonly IProcessMonitorService _processMonitorService;
         private static TeamsStateReader _teamsStateReader;
         private static CameraStateReader _cameraStateReader;
         private const string TEAMS_PROCESS_NAME = "Teams";
@@ -22,13 +21,13 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
 
         #region Constructor
 
-        public Teams(IProcessMonitorService processMonitorService)
+        public Teams()
         {
-            _processMonitorService = processMonitorService;
+            // no injected IProcessMonitorService anymore
         }
 
-        // Allow Datamodel availabable to all profiles
-        //public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("Teams") };
+        // Allow Datamodel available to all profiles
+        // public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("Teams") };
 
         public override List<IModuleActivationRequirement> ActivationRequirements => null;
 
@@ -41,6 +40,7 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
             _teamsStateReader.StatusChanged += TeamsLogService_StatusChanged;
             _teamsStateReader.ActivityChanged += TeamsLogService_ActivityChanged;
             _teamsStateReader.Start();
+
             _cameraStateReader = new CameraStateReader(1000);
             _cameraStateReader.StatusChanged += CameraDetectionService_StatusChanged;
             _cameraStateReader.CameraOwnerChanged += _cameraStateReader_CameraOwnerChanged;
@@ -49,7 +49,7 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
 
         private bool TeamsIsRunning()
         {
-            return _processMonitorService.GetRunningProcesses().Any(p => p.ProcessName == TEAMS_PROCESS_NAME);
+            return Process.GetProcessesByName(TEAMS_PROCESS_NAME).Any();
         }
 
         private void _cameraStateReader_CameraOwnerChanged(object sender, CameraOwnerChangedEventArgs e)
@@ -95,6 +95,5 @@ namespace Artemis.Plugins.DataModelExpansions.Teams
         public override void Update(double deltaTime) { }
 
         #endregion
-
     }
 }
