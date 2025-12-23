@@ -1,6 +1,6 @@
 {
   "Guid": "53dc7e1c-6dbe-4c5b-934d-00dc33dd883a",
-  "Api": "1.0",
+  "MinimumVersion": "1.2025.1222.3",
   "Name": "Ripples",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
