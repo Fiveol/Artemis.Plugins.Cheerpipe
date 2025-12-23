@@ -4,8 +4,8 @@ using System.Linq;
 using Artemis.Core;
 using Artemis.Core.Modules;
 using Artemis.Plugins.DataModelExpansions.OpenWeather.DataModels;
-using Awesomio.NET.Models.CurrentWeather;
-using Awesomio.Weather.NET;
+using Awesomio.Weather.Models.CurrentWeather;   // corrected namespace
+using Awesomio.Weather;                         // corrected namespace
 using Serilog;
 
 namespace Artemis.Plugins.DataModelExpansions.OpenWeather
@@ -38,8 +38,8 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
 
         public override void Enable()
         {
-            //TODO: Make frequency configurable 
-            AddTimedUpdate(TimeSpan.FromMinutes(10), _ => UpdateWeatherData());
+            // TODO: Make frequency configurable 
+            AddTimedUpdate(TimeSpan.FromSeconds(10), _ => UpdateWeatherData());
             UpdateWeatherData();
         }
 
@@ -51,14 +51,16 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
         {
             try
             {
-                //If no settings, do nothing
                 if (string.IsNullOrEmpty(_citySetting.Value) || string.IsNullOrEmpty(_unitOfMeasurementSetting.Value))
                     return;
 
-                //TODO: Use settings
                 string accessKey = _apiKeySetting.Value;
-                WeatherClient client = new WeatherClient(accessKey);
-                CurrrentWeatherModel data = client.GetCurrentWeatherAsync<CurrrentWeatherModel>(_citySetting.Value, "en", _unitOfMeasurementSetting.Value).Result;
+                var client = new WeatherClient(accessKey);
+
+                // corrected type name
+                CurrentWeatherModel data = client
+                    .GetCurrentWeatherAsync<CurrentWeatherModel>(_citySetting.Value, "en", _unitOfMeasurementSetting.Value)
+                    .Result;
 
                 // Weather Measurements
                 DataModel.Weather = (WeatherConditions)Enum.Parse(typeof(WeatherConditions), data.Weather.FirstOrDefault()?.Main ?? "Unknown");
@@ -70,12 +72,12 @@ namespace Artemis.Plugins.DataModelExpansions.OpenWeather
                 DataModel.Humidity = data.Main.Humidity;
 
                 // Visibility
-                DataModel.Clouds = data.Clouds.All; // Cloudiness
-                DataModel.Visibility = data.Visibility; // Meters
+                DataModel.Clouds = data.Clouds.All;
+                DataModel.Visibility = data.Visibility;
 
-                // Sunrise Sunset
-                DataModel.Sunrise = DateTimeOffset.FromUnixTimeSeconds(data.Sys.Sunrise).DateTime.ToLocalTime(); // unix, UTC
-                DataModel.Sunset = DateTimeOffset.FromUnixTimeSeconds(data.Sys.Sunset).DateTime.ToLocalTime(); // unix, UTC
+                // Sunrise / Sunset
+                DataModel.Sunrise = DateTimeOffset.FromUnixTimeSeconds(data.Sys.Sunrise).DateTime.ToLocalTime();
+                DataModel.Sunset = DateTimeOffset.FromUnixTimeSeconds(data.Sys.Sunset).DateTime.ToLocalTime();
 
                 // Wind
                 DataModel.Wind.Speed = data.Wind.Speed;
