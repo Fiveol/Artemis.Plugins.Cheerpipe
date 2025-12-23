@@ -1,7 +1,7 @@
 using Artemis.Plugins.DataModelExpansions.OpenWeather.ViewModels;
 using Artemis.UI.Shared;
 using Avalonia.Markup.Xaml;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 
 namespace Artemis.Plugins.DataModelExpansions.OpenWeather.Views;
 
