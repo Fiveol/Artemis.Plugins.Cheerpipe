@@ -16,7 +16,6 @@ jobs:
       displaysettings: ${{ steps.filter.outputs.displaysettings }}
       ytmdesktop: ${{ steps.filter.outputs.ytmdesktop }}
       openweather: ${{ steps.filter.outputs.openweather }}
-      profiles: ${{ steps.filter.outputs.profiles }}
       powerplan: ${{ steps.filter.outputs.powerplan }}
       teams: ${{ steps.filter.outputs.teams }}
       solidpercentage: ${{ steps.filter.outputs.solidpercentage }}
@@ -42,8 +41,6 @@ jobs:
               - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.YTMdesktop/**'
             openweather:
               - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.OpenWeather/**'
-            profiles:
-              - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/**'
             powerplan:
               - 'src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.PowerPlan/**'
             teams:
@@ -104,18 +101,6 @@ jobs:
         with:
           name: OpenWeather
           path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.OpenWeather/bin/Release/net10.0-windows/publish/
-
-  build-profiles:
-    runs-on: windows-latest
-    needs: changes
-    if: needs.changes.outputs.profiles == 'true' || github.event_name == 'workflow_dispatch'
-    steps:
-      - uses: actions/checkout@v3
-      - run: dotnet publish -c Release src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/Artemis.Plugins.DataModelExpansions.Profiles.csproj
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Profiles
-          path: src/DataModelExpansions/Artemis.Plugins.DataModelExpansions.Profiles/bin/Release/net10.0-windows/publish/
 
   build-powerplan:
     runs-on: windows-latest
