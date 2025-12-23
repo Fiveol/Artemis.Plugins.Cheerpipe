@@ -1,29 +1,26 @@
-using Artemis.Core.Services;
 using Artemis.Plugins.DataModelExpansions.YTMdesktop.DataModels;
 using Serilog;
 using SkiaSharp;
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 using Artemis.Core.Modules;
 using Artemis.Core;
-using System.Collections.Generic;
 using Artemis.Core.ColorScience;
-// ReSharper disable InconsistentNaming
 
 namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 {
-
     [PluginFeature(Name = "Youtube Music Desktop Player", AlwaysEnabled = true)]
     public class YTMdesktopDataModelExpansion : Module<YTMdesktopDataModel>
     {
         #region Variables declarations
 
         private readonly ILogger _logger;
-        private readonly IProcessMonitorService _processMonitorService;
         private readonly HttpClient _httpClient;
         private readonly ConcurrentDictionary<string, ColorSwatch> _albumArtColorCache;
         private const string YTMD_PROCESS_NAME = "YouTube Music Desktop App";
@@ -36,9 +33,8 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
 
         #region Constructor
 
-        public YTMdesktopDataModelExpansion(ILogger logger, IProcessMonitorService processMonitorService)
+        public YTMdesktopDataModelExpansion(ILogger logger)
         {
-            _processMonitorService = processMonitorService;
             _logger = logger;
 
             _httpClient = new HttpClient
@@ -48,22 +44,30 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             _albumArtColorCache = new ConcurrentDictionary<string, ColorSwatch>();
         }
 
-        // Allow Datamodel availabable to all profiles
-        //public override List<IModuleActivationRequirement> ActivationRequirements => new() { new ProcessActivationRequirement("YouTube Music Desktop App") };
         public override List<IModuleActivationRequirement> ActivationRequirements => null;
+
         #endregion
 
         #region Plugin Methods
+
         public override void Enable()
         {
             AddTimedUpdate(TimeSpan.FromSeconds(1), UpdateData);
-
             _YTMDesktopClient = new YTMDesktopClient();
         }
 
         private bool YoutubeIsRunning()
         {
-            return _processMonitorService.GetRunningProcesses().Any(p => p.ProcessName == YTMD_PROCESS_NAME);
+            try
+            {
+                // Match by process name (without .exe)
+                return Process.GetProcessesByName("YouTube Music Desktop App").Any();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Failed to query processes: {ex}");
+                return false;
+            }
         }
 
         public override void Disable()
@@ -85,6 +89,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             DataModel.Player.SeekbarCurrentPosition = DataModel.Player.SeekbarCurrentPositionHuman.TotalSeconds;
             DataModel.Player.StatePercent = DataModel.Player.SeekbarCurrentPosition / DataModel.Track.Duration;
         }
+
         #endregion
 
         #region DataModel update methods
@@ -98,25 +103,19 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
         {
             if (!YoutubeIsRunning())
             {
-                // Don't query server if YTMD proccess is down.
                 DataModel.Empty();
-
                 return;
             }
+
             try
             {
-                // Update DataModel using /query API
                 _YTMDesktopClient?.Update();
                 _rootInfo = _YTMDesktopClient?.Data;
 
                 if (_rootInfo != null)
-                {
                     await UpdateInfo(_rootInfo);
-                }
                 else
-                {
                     DataModel.Empty();
-                }
             }
             catch (Exception e)
             {
@@ -131,13 +130,9 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
             if (data.Player.HasSong && data.Track != null)
                 await UpdateTrackInfo(data.Track);
             else
-            {
                 DataModel.Track.Empty();
-            }
         }
 
-        // Thanks again to diogotr7 for the original code
-        // https://github.com/diogotr7/Artemis.Plugins/blob/a1846bb3b2e0cb426ecd2b9ae787bade8212f446/src/Artemis.Plugins.Modules.Spotify/SpotifyModule.cs#L209
         private async Task UpdateTrackInfo(TrackInfo track)
         {
             if (track.Id != _trackId)
@@ -148,6 +143,7 @@ namespace Artemis.Plugins.DataModelExpansions.YTMdesktop
                 {
                     if (string.IsNullOrEmpty(track.Cover))
                         return;
+
                     await UpdateAlbumArtColors(track.Cover);
                     _albumArtUrl = track.Cover;
                 }
