@@ -9,6 +9,8 @@
 
     <ItemGroup>
         <PackageReference Include="ArtemisRGB.UI.Shared" IncludeAssets="compile;build;buildTransitive" Version="1.2025.1222.4" />
+        <PackageReference Include="System.Management" Version="7.0.0" />
+
     </ItemGroup>
 
     <ItemGroup>
