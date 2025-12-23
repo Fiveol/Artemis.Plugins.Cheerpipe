@@ -1,36 +1,36 @@
-using Artemis.Core;
+﻿using Artemis.Core;
 using System;
 
-namespace Artemis.Plugins.Nodes.Extra.MathNodes
+namespace Artemis.Plugins.Nodes.Extra.MathNodes;
+
+[Node("Abs", "Return absolute value", "Mathematics", InputType = typeof(Numeric), OutputType = typeof(Numeric))]
+public class AbsNumericNode : Node
 {
-    [Node("Abs", "Return absolute value", "Mathematics", InputType = typeof(double), OutputType = typeof(double))]
-    public class AbsNumericNode : Node
+    #region Properties & Fields
+
+    public InputPin<Numeric> Input { get; }
+    public OutputPin<Numeric> Output { get; }
+
+    #endregion
+
+    #region Constructors
+
+    public AbsNumericNode()
     {
-        #region Properties & Fields
-
-        public InputPin<double> Input { get; }
-        public OutputPin<double> Output { get; }
-
-        #endregion
-
-        #region Constructors
-
-        public AbsNumericNode()
-        {
-            Input = CreateInputPin<double>();
-            Output = CreateOutputPin<double>();
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <inheritdoc />
-        public override void Evaluate()
-        {
-            Output.Value = Math.Abs(Input.Value);
-        }
-
-        #endregion
+        Input = CreateInputPin<Numeric>();
+        Output = CreateOutputPin<Numeric>();
     }
+
+    #endregion
+
+    #region Methods
+
+    /// <inheritdoc />
+    public override void Evaluate()
+    {
+
+        Output.Value = Math.Abs(Input.Value);
+    }
+
+    #endregion
 }
