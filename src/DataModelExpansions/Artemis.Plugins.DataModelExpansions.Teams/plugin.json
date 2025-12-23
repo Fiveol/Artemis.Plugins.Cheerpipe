@@ -1,6 +1,6 @@
 {
   "Guid": "c2f2d952-8b0c-4453-b9b9-6d781e378fe0",
-  "Api": "1.0",
+  "MinimumVersion": "1.2025.1222.3",
   "Name": "Teams",
   "Author": "Cheerpipe",
   "Repository": "https://github.com/Cheerpipe/Artemis.Plugins.Public",
