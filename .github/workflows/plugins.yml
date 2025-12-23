@@ -26,7 +26,6 @@ jobs:
       drippingpaint: ${{ steps.filter.outputs.drippingpaint }}
       json: ${{ steps.filter.outputs.json }}
       flickeringlights: ${{ steps.filter.outputs.flickeringlights }}
-      extendedwebapi: ${{ steps.filter.outputs.extendedwebapi }}
       extranodes: ${{ steps.filter.outputs.extranodes }}
     steps:
       - uses: actions/checkout@v3
@@ -61,8 +60,6 @@ jobs:
               - 'src/Modules/Artemis.Plugins.Modules.Json/**'
             flickeringlights:
               - 'src/LayerEffects/Artemis.Plugins.LayerEffect.FlickeringLights/**'
-            extendedwebapi:
-              - 'src/Collections/Artemis.Plugins.ExtendedWebAPI/**'
             extranodes:
               - 'src/Nodes/Artemis.Plugins.Nodes.Extra/**'
 
@@ -221,18 +218,6 @@ jobs:
         with:
           name: FlickeringLights
           path: src/LayerEffects/Artemis.Plugins.LayerEffect.FlickeringLights/bin/Release/net10.0-windows/publish/
-
-  build-extendedwebapi:
-    runs-on: windows-latest
-    needs: changes
-    if: needs.changes.outputs.extendedwebapi == 'true' || github.event_name == 'workflow_dispatch'
-    steps:
-      - uses: actions/checkout@v3
-      - run: dotnet publish -c Release src/Collections/Artemis.Plugins.ExtendedWebAPI/Artemis.Plugins.ExtendedWebAPI.csproj
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ExtendedWebAPI
-          path: src/Collections/Artemis.Plugins.ExtendedWebAPI/bin/Release/net10.0-windows/publish/
 
   build-extranodes:
     runs-on: windows-latest
